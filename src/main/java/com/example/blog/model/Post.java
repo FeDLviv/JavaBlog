@@ -2,23 +2,23 @@ package com.example.blog.model;
 
 public class Post {
 
-    private Long id;
+    private int id;
     private String title;
     private String text;
 
     public Post(){}
 
-    public Post(Long id, String title, String text){
+    public Post(int id, String title, String text){
         this.id = id;
         this.title  = title;
         this.text = text;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

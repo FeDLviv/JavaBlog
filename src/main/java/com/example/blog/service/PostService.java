@@ -1,19 +1,20 @@
 package com.example.blog.service;
 
 import com.example.blog.model.Post;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class PostService {
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     public List<Post> getPosts(){
-        List<Post> posts = new ArrayList<Post>();
-        posts.add(new Post(1L, "Tutorial spring", "More text..."));
-        posts.add(new Post(2L, "About Ant", "More text..."));
-        posts.add(new Post(3L, "Java Collections", "More text..."));
-        return posts;
+        return jdbcTemplate.query("SELECT * FROM Post", new BeanPropertyRowMapper(Post.class));
     }
 }
