@@ -12,8 +12,8 @@ public class PostService {
     public List<Post> getPosts(){
         List<Post> posts = new ArrayList<Post>();
         posts.add(new Post(1L, "Tutorial spring", "More text..."));
-        posts.add(new Post(1L, "About Ant", "More text..."));
-        posts.add(new Post(1L, "Java Collections", "More text..."));
+        posts.add(new Post(2L, "About Ant", "More text..."));
+        posts.add(new Post(3L, "Java Collections", "More text..."));
         return posts;
     }
 }
