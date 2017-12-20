@@ -1,6 +1,8 @@
-myApp.controller('mainCtrl', function ($scope, $http) {
+myApp.controller('mainCtrl', function ($scope, $http, $location) {
 
-    $http.get("http://localhost:8080/posts").then(function (response) {
+    var url = $location.absUrl();
+
+    $http.get(url+'posts').then(function (response) {
         $scope.posts = response.data;
     });
 });
