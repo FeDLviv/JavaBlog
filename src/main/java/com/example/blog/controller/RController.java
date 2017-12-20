@@ -10,18 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class Controller {
+@RequestMapping("/posts")
+public class RController {
 
     @Autowired
     private PostService postService;
 
-    @RequestMapping("/")
-    public String index(){
-        return "My blog!!!";
-    }
-
     @RequestMapping(name="/posts", method= RequestMethod.GET)
-    public List<Post> posts(){
+     public List<Post> posts(){
         return postService.getPosts();
     }
 }

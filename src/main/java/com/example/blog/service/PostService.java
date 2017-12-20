@@ -17,4 +17,5 @@ public class PostService {
     public List<Post> getPosts(){
         return jdbcTemplate.query("SELECT * FROM Post", new BeanPropertyRowMapper(Post.class));
     }
+
 }
