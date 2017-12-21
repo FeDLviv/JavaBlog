@@ -2,6 +2,7 @@ package com.example.blog.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class Post {
@@ -16,14 +17,9 @@ public class Post {
     @Column(name = "public")
     private Date datePublic;
 
-    public Post(){}
-
-    public Post(int id, String title, String text, Date datePublic){
-        this.id = id;
-        this.title  = title;
-        this.text = text;
-        this.datePublic = datePublic;
-    }
+    @ManyToMany
+    @JoinTable(name="postMark", joinColumns = @JoinColumn(name="idPost"), inverseJoinColumns = @JoinColumn(name="idMark"))
+    private Set<Mark> marks;
 
     public int getId() {
         return id;
@@ -57,7 +53,22 @@ public class Post {
         this.datePublic = datePublic;
     }
 
-    public String toString() {
-        return "Post {id="+id+", title="+title+", text="+text+", datePublic="+datePublic+"}";
+    public Set<Mark> getMarks() {
+        return marks;
     }
+
+    public void setMarks(Set<Mark> marks) {
+        this.marks = marks;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", text='" + text + '\'' +
+                ", datePublic=" + datePublic +
+                '}';
+    }
+
 }
