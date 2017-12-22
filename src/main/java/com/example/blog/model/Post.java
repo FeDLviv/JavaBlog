@@ -9,7 +9,7 @@ public class Post {
 
     @Id
     @Column(name = "id_post")
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private String title;
     @Column(columnDefinition = "TEXT")

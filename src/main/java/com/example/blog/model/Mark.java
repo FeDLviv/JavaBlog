@@ -8,7 +8,7 @@ public class Mark {
 
     @Id
     @Column(name = "id_mark")
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private String name;
     @ManyToMany
