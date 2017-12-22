@@ -2,20 +2,24 @@ package com.example.blog.model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
-public class Post {
+public class Comment {
 
     @Id
-    @Column(name = "id_post")
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id_comment")
     private int id;
-    private String title;
     @Column(columnDefinition = "TEXT")
     private String text;
     @Column(name = "public")
     private Date datePublic;
+    @OneToOne
+    @JoinColumn(name="id_user")
+    private User user;
+    @OneToOne
+    @JoinColumn(name="id_post")
+    private Post post;
 
     public int getId() {
         return id;
@@ -23,14 +27,6 @@ public class Post {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getText() {
@@ -49,13 +45,30 @@ public class Post {
         this.datePublic = datePublic;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
     @Override
     public String toString() {
-        return "Post{" +
+        return "Comment{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
                 ", text='" + text + '\'' +
                 ", datePublic=" + datePublic +
+                ", user=" + user +
+                ", post=" + post +
                 '}';
     }
 }

@@ -23,7 +23,7 @@ CREATE TABLE `comment` (
   `id_comment` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_post` int(10) unsigned NOT NULL,
   `id_user` int(10) unsigned NOT NULL,
-  `comment` text NOT NULL,
+  `text` text NOT NULL,
   `public` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_comment`),
   KEY `FK_IND` (`id_post`),
