@@ -7,12 +7,10 @@ import java.util.Set;
 public class Mark {
 
     @Id
+    @Column(name = "id_mark")
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
     private String name;
-    @ManyToMany
-    @JoinTable(name="postMark", joinColumns = @JoinColumn(name="idMark"), inverseJoinColumns = @JoinColumn(name="idPost"))
-    private Set<Post> posts;
 
     public int getId() {
         return id;
@@ -28,14 +26,6 @@ public class Mark {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(Set<Post> posts) {
-        this.posts = posts;
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.Set;
 public class Post {
 
     @Id
-    //@Column(name = "idPost")
+    @Column(name = "id_post")
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
     private String title;
@@ -18,7 +18,7 @@ public class Post {
     private Date datePublic;
 
     @ManyToMany
-    @JoinTable(name="postMark", joinColumns = @JoinColumn(name="idPost"), inverseJoinColumns = @JoinColumn(name="idMark"))
+    @JoinTable(name="post_mark", joinColumns = @JoinColumn(name="id_post"), inverseJoinColumns = @JoinColumn(name="id_mark"))
     private Set<Mark> marks;
 
     public int getId() {
@@ -68,6 +68,7 @@ public class Post {
                 ", title='" + title + '\'' +
                 ", text='" + text + '\'' +
                 ", datePublic=" + datePublic +
+                ", marks=" + marks +
                 '}';
     }
 

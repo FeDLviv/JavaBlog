@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface  MarkRepository extends CrudRepository<Mark, Integer> {
+public interface MarkRepository extends CrudRepository<Mark, Integer> {
 
     List<Mark> findAll();
 
