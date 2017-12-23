@@ -38,11 +38,14 @@ public class PostController {
         return postRepository.findById(id);
     }
 
-//    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-//    @ApiOperation(value = "Оновлення поста по ID")
-//    public @ResponseBody Post updatePost(@RequestBody Post post, @PathVariable int id) {
-//        return postRepository.save(post);
-//    }
+    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
+    @ApiOperation(value = "Оновлення поста по ID")
+    public int updatePost(@RequestBody Post post, @PathVariable int id) {
+        //System.out.println(post);
+        //post.setDatePublic(new Date());
+        return postRepository.updatePost(id, post.getTitle(), post.getText());
+        //return postRepository.save(post);
+    }
 
     @RequestMapping(method=RequestMethod.DELETE)
     @ApiOperation(value = "Видалення всіх постів")

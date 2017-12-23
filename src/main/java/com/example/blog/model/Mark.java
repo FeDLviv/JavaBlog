@@ -4,12 +4,14 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name="mark")
 public class Mark {
 
     @Id
     @Column(name = "id_mark")
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = false)
     private String name;
     @ManyToMany
     @JoinTable(name="post_mark", joinColumns = @JoinColumn(name="id_mark"), inverseJoinColumns = @JoinColumn(name="id_post"))
@@ -44,7 +46,6 @@ public class Mark {
         return "Mark{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", posts=" + posts +
                 '}';
     }
 

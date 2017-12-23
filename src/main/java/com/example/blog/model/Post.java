@@ -1,20 +1,25 @@
 package com.example.blog.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
+@Table(name="post")
 public class Post {
 
     @Id
     @Column(name = "id_post")
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = false)
     private String title;
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String text;
-    @Column(name = "public")
+    @Column(name = "public", nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    //@Temporal(TemporalType.TIMESTAMP)
     private Date datePublic;
 
     public int getId() {
