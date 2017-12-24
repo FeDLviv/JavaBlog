@@ -11,9 +11,11 @@ public class Mark {
     @Column(name = "id_mark")
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
+
     @Column(nullable = false)
     private String name;
-    @ManyToMany
+
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="post_mark", joinColumns = @JoinColumn(name="id_mark"), inverseJoinColumns = @JoinColumn(name="id_post"))
     private Set<Post> posts;
 

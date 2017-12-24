@@ -1,5 +1,6 @@
 package com.example.blog.controller;
 
+import com.example.blog.dto.PostIdAndTitle;
 import com.example.blog.model.Post;
 import com.example.blog.repository.PostRepository;
 import io.swagger.annotations.Api;
@@ -28,8 +29,8 @@ public class PostController {
 
     @RequestMapping(method= RequestMethod.GET)
     @ApiOperation(value = "Отримання всіх постів")
-     public List<Post> readPosts(){
-         return postRepository.findAll();
+     public List<PostIdAndTitle> readPosts(){
+        return postRepository.getList();
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
@@ -41,9 +42,8 @@ public class PostController {
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
     @ApiOperation(value = "Оновлення поста по ID")
     public int updatePost(@RequestBody Post post, @PathVariable int id) {
-        //System.out.println(post);
-        //post.setDatePublic(new Date());
-        return postRepository.updatePost(id, post.getTitle(), post.getText());
+        System.out.println(post);
+        return postRepository.updatePost(id, post.getTitle(), post.getText(), post.getDatePublic());
         //return postRepository.save(post);
     }
 
