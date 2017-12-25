@@ -1,7 +1,8 @@
-package com.example.blog.model;
+package com.example.blog.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name="post")
 @JsonIgnoreProperties({"marks", "comments"})
+@Data
 public class Post{
 
     @Id
@@ -28,59 +30,12 @@ public class Post{
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date datePublic;
 
-    @ManyToMany(mappedBy = "posts")
+    @ManyToMany
+    @JoinTable(name="post_mark", joinColumns = @JoinColumn(name="id_post"), inverseJoinColumns = @JoinColumn(name="id_mark"))
     private Set<Mark> marks;
 
     @OneToMany(mappedBy = "post")
     private Set<Comment> comments;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public Date getDatePublic() {
-        return datePublic;
-    }
-
-    public void setDatePublic(Date datePublic) {
-        this.datePublic = datePublic;
-    }
-
-    public Set<Mark> getMarks() {
-        return marks;
-    }
-
-    public void setMarks(Set<Mark> marks) {
-        this.marks = marks;
-    }
-
-    public Set<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(Set<Comment> comments) {
-        this.comments = comments;
-    }
 
     @Override
     public String toString() {

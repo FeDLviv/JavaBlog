@@ -13,17 +13,16 @@
 <body data-ng-controller="mainCtrl">
 
     <div class="container">
-        <p class="h1 text-center">Вітаю на своєму Java блозі</p>
+        <p class="h1 text-center" th:text="${hello}"></p>
         <div class="row my-2">
             <div class="col-4 my-2" data-ng-repeat="x in posts">
                 <div class="card text-center">
-                    <div class="card-header">{{x.id}}</div>
+                    <div class="card-header">{{x.text}}</div>
                     <div class="card-block">
                         <h4 class="card-title">{{x.title}}</h4>
                         <p class="card-text"></p>
                     </div>
-                    <div class="card-footer text-muted">
-                    </div>
+                    <div class="card-footer text-muted">{{x.datePublic}}</div>
                 </div>
             </div>
         </div>

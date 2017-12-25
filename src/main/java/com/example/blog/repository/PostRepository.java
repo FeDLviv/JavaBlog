@@ -1,7 +1,7 @@
 package com.example.blog.repository;
 
-import com.example.blog.dto.PostIdAndTitle;
-import com.example.blog.model.Post;
+import com.example.blog.dto.SimplePostDTO;
+import com.example.blog.entity.Post;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -18,8 +18,8 @@ public interface PostRepository extends CrudRepository<Post, Integer> {
 
     List<Post> findAll();
 
-    @Query("SELECT new com.example.blog.dto.PostIdAndTitle(p.id, p.title) FROM Post p")
-    List<PostIdAndTitle> getList();
+    @Query("SELECT new com.example.blog.dto.SimplePostDTO(p.id, p.title, CONCAT(SUBSTRING(p.text, 1, 15), '...'), p.datePublic) FROM Post p ORDER BY p.id")
+    List<SimplePostDTO> getList();
 
     @Modifying
     @Transactional
@@ -32,7 +32,7 @@ public interface PostRepository extends CrudRepository<Post, Integer> {
     //@Query("Select p.id FROM Post p")
     //List<PostProjection> test2();
 
-    //@Query("SELECT new com.example.blog.model.Post(p.id, p.title) FROM Post p")
+    //@Query("SELECT new com.example.blog.entity.Post(p.id, p.title) FROM Post p")
     //List<Post> test3();
 
 }

@@ -1,7 +1,7 @@
 package com.example.blog.controller;
 
-import com.example.blog.dto.PostIdAndTitle;
-import com.example.blog.model.Post;
+import com.example.blog.dto.SimplePostDTO;
+import com.example.blog.entity.Post;
 import com.example.blog.repository.PostRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,40 +20,39 @@ public class PostController {
     @Autowired
     private PostRepository postRepository;
 
-    @RequestMapping(method=RequestMethod.POST)
+    @PostMapping
     @ApiOperation(value = "Додавання нового поста")
     public Post createPost (@RequestBody Post post) {
         post.setDatePublic(new Date());
         return postRepository.save(post);
     }
 
-    @RequestMapping(method= RequestMethod.GET)
+    @GetMapping
     @ApiOperation(value = "Отримання всіх постів")
-     public List<PostIdAndTitle> readPosts(){
+     public List<SimplePostDTO> readPosts(){
         return postRepository.getList();
     }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.GET)
+    @GetMapping(value="/{id}")
     @ApiOperation(value = "Отримання поста по ID")
     public Optional<Post> readPost(@PathVariable int id) {
         return postRepository.findById(id);
     }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
+    @PutMapping(value="/{id}")
     @ApiOperation(value = "Оновлення поста по ID")
     public int updatePost(@RequestBody Post post, @PathVariable int id) {
-        System.out.println(post);
         return postRepository.updatePost(id, post.getTitle(), post.getText(), post.getDatePublic());
         //return postRepository.save(post);
     }
 
-    @RequestMapping(method=RequestMethod.DELETE)
+    @DeleteMapping
     @ApiOperation(value = "Видалення всіх постів")
     public void deletePosts() {
         postRepository.deleteAll();
     }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+    @DeleteMapping(value="/{id}")
     @ApiOperation(value = "Видалення поста по ID")
     public void deletePost(@PathVariable int id) {
         postRepository.deleteById(id);

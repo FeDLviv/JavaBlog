@@ -9,6 +9,7 @@ public class MainController {
 
     @RequestMapping("/")
     public String index(Model model){
+        model.addAttribute("hello", "Вітаю на своєму Java блозі");
         return "index";
     }
 
