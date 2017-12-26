@@ -1,6 +1,7 @@
 package com.example.blog.controller;
 
-import com.example.blog.dto.SimplePostDTO;
+import com.example.blog.dto.NewPostDTO;
+import com.example.blog.dto.PostDTO;
 import com.example.blog.entity.Post;
 import com.example.blog.repository.PostRepository;
 import io.swagger.annotations.Api;
@@ -22,26 +23,29 @@ public class PostController {
 
     @PostMapping
     @ApiOperation(value = "Додавання нового поста")
-    public Post createPost (@RequestBody Post post) {
-        post.setDatePublic(new Date());
-        return postRepository.save(post);
+    public Post createPost (@RequestBody NewPostDTO post) {
+        Post temp = new Post();
+        temp.setTitle(post.getTitle());
+        temp.setText(post.getText());
+        temp.setDatePublic(new Date());
+        return postRepository.save(temp);
     }
 
     @GetMapping
-    @ApiOperation(value = "Отримання всіх постів")
-     public List<SimplePostDTO> readPosts(){
+    @ApiOperation(value = "Отримання всіх постів, сортованих по даті публікації, з коротким текстом")
+     public List<PostDTO> readPosts(){
         return postRepository.getList();
     }
 
     @GetMapping(value="/{id}")
     @ApiOperation(value = "Отримання поста по ID")
-    public Optional<Post> readPost(@PathVariable int id) {
-        return postRepository.findById(id);
+    public PostDTO readPost(@PathVariable int id) {
+        return postRepository.getById(id);
     }
 
     @PutMapping(value="/{id}")
     @ApiOperation(value = "Оновлення поста по ID")
-    public int updatePost(@RequestBody Post post, @PathVariable int id) {
+    public int updatePost(@RequestBody PostDTO post, @PathVariable int id) {
         return postRepository.updatePost(id, post.getTitle(), post.getText(), post.getDatePublic());
         //return postRepository.save(post);
     }

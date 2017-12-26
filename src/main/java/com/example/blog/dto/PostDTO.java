@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Getter
 @AllArgsConstructor
-public class SimplePostDTO {
+public class PostDTO {
 
     private int id;
 
