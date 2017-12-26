@@ -1,7 +1,5 @@
 package com.example.blog.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="post")
-@JsonIgnoreProperties({"marks", "comments"})
+//@JsonIgnoreProperties({"marks", "comments"})
 @Data
 public class Post{
 
@@ -27,7 +25,7 @@ public class Post{
 
     @Column(name = "public", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern="yyyy-MM-dd")
+    //@JsonFormat(pattern="yyyy-MM-dd")
     private Date datePublic;
 
     @ManyToMany

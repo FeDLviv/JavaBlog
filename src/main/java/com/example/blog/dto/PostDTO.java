@@ -1,13 +1,14 @@
 package com.example.blog.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
+
 
 import java.util.Date;
 
-@Getter
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class PostDTO {
 
     private int id;

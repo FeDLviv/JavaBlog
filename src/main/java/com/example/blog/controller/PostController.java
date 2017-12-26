@@ -2,16 +2,13 @@ package com.example.blog.controller;
 
 import com.example.blog.dto.NewPostDTO;
 import com.example.blog.dto.PostDTO;
-import com.example.blog.entity.Post;
-import com.example.blog.repository.PostRepository;
+import com.example.blog.service.PostService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/post")
@@ -19,47 +16,42 @@ import java.util.Optional;
 public class PostController {
 
     @Autowired
-    private PostRepository postRepository;
+    private PostService postService;
 
     @PostMapping
     @ApiOperation(value = "Додавання нового поста")
-    public Post createPost (@RequestBody NewPostDTO post) {
-        Post temp = new Post();
-        temp.setTitle(post.getTitle());
-        temp.setText(post.getText());
-        temp.setDatePublic(new Date());
-        return postRepository.save(temp);
+    public PostDTO createPost (@RequestBody NewPostDTO post) {
+        return postService.createPost(post);
     }
 
     @GetMapping
     @ApiOperation(value = "Отримання всіх постів, сортованих по даті публікації, з коротким текстом")
      public List<PostDTO> readPosts(){
-        return postRepository.getList();
+        return postService.readPosts();
     }
 
     @GetMapping(value="/{id}")
     @ApiOperation(value = "Отримання поста по ID")
     public PostDTO readPost(@PathVariable int id) {
-        return postRepository.getById(id);
+        return postService.readPost(id);
     }
 
     @PutMapping(value="/{id}")
     @ApiOperation(value = "Оновлення поста по ID")
     public int updatePost(@RequestBody PostDTO post, @PathVariable int id) {
-        return postRepository.updatePost(id, post.getTitle(), post.getText(), post.getDatePublic());
-        //return postRepository.save(post);
+        return postService.updatePost(post, id);
     }
 
     @DeleteMapping
     @ApiOperation(value = "Видалення всіх постів")
     public void deletePosts() {
-        postRepository.deleteAll();
+        postService.deletePosts();
     }
 
     @DeleteMapping(value="/{id}")
     @ApiOperation(value = "Видалення поста по ID")
     public void deletePost(@PathVariable int id) {
-        postRepository.deleteById(id);
+        postService.deletePost(id);
     }
 
 }
