@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/post")
-@Api(description="Операції повязані з постами")
+@RequestMapping("/api/post")
+@Api(description = "Операції повязані з постами")
 public class PostController {
 
     @Autowired
@@ -20,23 +20,23 @@ public class PostController {
 
     @PostMapping
     @ApiOperation(value = "Додавання нового поста")
-    public PostDTO createPost (@RequestBody NewPostDTO post) {
+    public PostDTO createPost(@RequestBody NewPostDTO post) {
         return postService.createPost(post);
     }
 
     @GetMapping
     @ApiOperation(value = "Отримання всіх постів, сортованих по даті публікації, з коротким текстом")
-     public List<PostDTO> readPosts(){
+    public List<PostDTO> readPosts() {
         return postService.readPosts();
     }
 
-    @GetMapping(value="/{id}")
+    @GetMapping(value = "/{id}")
     @ApiOperation(value = "Отримання поста по ID")
     public PostDTO readPost(@PathVariable int id) {
         return postService.readPost(id);
     }
 
-    @PutMapping(value="/{id}")
+    @PutMapping(value = "/{id}")
     @ApiOperation(value = "Оновлення поста по ID")
     public int updatePost(@RequestBody PostDTO post, @PathVariable int id) {
         return postService.updatePost(post, id);
@@ -48,7 +48,7 @@ public class PostController {
         postService.deletePosts();
     }
 
-    @DeleteMapping(value="/{id}")
+    @DeleteMapping(value = "/{id}")
     @ApiOperation(value = "Видалення поста по ID")
     public void deletePost(@PathVariable int id) {
         postService.deletePost(id);

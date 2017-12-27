@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NewPostDTO {
+public class UserDTO {
 
-    private String title;
+    private int id;
 
-    private String text;
+    private String name;
+
 }

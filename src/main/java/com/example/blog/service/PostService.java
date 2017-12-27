@@ -1,6 +1,6 @@
 package com.example.blog.service;
 
-import com.example.blog.dto.BlogMapper;
+import com.example.blog.mapper.PostMapper;
 import com.example.blog.dto.NewPostDTO;
 import com.example.blog.dto.PostDTO;
 import com.example.blog.repository.PostRepository;
@@ -16,7 +16,7 @@ public class PostService {
     private PostRepository postRepository;
 
     public PostDTO createPost(NewPostDTO post) {
-        return BlogMapper.INSTANCE.PostToPostDTO(postRepository.save(BlogMapper.INSTANCE.NewPostDTOToPost(post)));
+        return PostMapper.INSTANCE.PostToPostDTO(postRepository.save(PostMapper.INSTANCE.NewPostDTOToPost(post)));
     }
 
     public List<PostDTO> readPosts() {

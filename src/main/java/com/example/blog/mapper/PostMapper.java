@@ -1,5 +1,7 @@
-package com.example.blog.dto;
+package com.example.blog.mapper;
 
+import com.example.blog.dto.NewPostDTO;
+import com.example.blog.dto.PostDTO;
 import com.example.blog.entity.Post;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -7,9 +9,9 @@ import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-public interface BlogMapper {
+public interface PostMapper {
 
-    BlogMapper INSTANCE = Mappers.getMapper(BlogMapper.class);
+    PostMapper INSTANCE = Mappers.getMapper(PostMapper.class);
 
     @Mappings({
             @Mapping(target = "title", source = "title"),

@@ -1,22 +1,18 @@
 package com.example.blog.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommentDTO {
-
-    private int id;
+public class NewCommentDTO {
 
     private String text;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date datePublic;
+    private int idPost;
+
+    private int idUser;
 
 }

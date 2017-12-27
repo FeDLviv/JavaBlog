@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
 
     @Bean
-    public Docket api(){
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.withClassAnnotation(RestController.class)).paths(PathSelectors.any()).build().apiInfo(apiInfo());
     }
 
@@ -24,7 +24,7 @@ public class SwaggerConfig {
                 "Blog REST API",
                 "REST API для створення блога",
                 "1.0.0",
-                "...", "Федько","...","...");
+                "...", "Федько", "...", "...");
     }
 
 }

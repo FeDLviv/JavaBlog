@@ -1,20 +1,19 @@
 package com.example.blog.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="user")
-@JsonIgnoreProperties("comments")
+@Table(name = "user")
+//@JsonIgnoreProperties("comments")
 @Data
 public class User {
 
     @Id
     @Column(name = "id_user")
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(nullable = false)

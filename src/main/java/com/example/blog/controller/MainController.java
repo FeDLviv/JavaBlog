@@ -8,9 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 
     @RequestMapping("/")
-    public String index(Model model){
+    public String index(Model model) {
         model.addAttribute("hello", "Вітаю на своєму Java блозі");
         return "index";
+    }
+
+    @RequestMapping("/api")
+    public String documentation() {
+        return "redirect:swagger-ui.html";
     }
 
 }
