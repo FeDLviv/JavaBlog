@@ -10,7 +10,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommentDTO {
+public class UpdateCommentDTO {
 
     private int id;
 
@@ -18,7 +18,5 @@ public class CommentDTO {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date datePublic;
-
-    private String author;
 
 }

@@ -2,7 +2,6 @@ package com.example.blog.repository;
 
 import com.example.blog.dto.PostDTO;
 import com.example.blog.entity.Post;
-
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -21,6 +20,9 @@ public interface PostRepository extends CrudRepository<Post, Integer> {
 
     @Query("SELECT new com.example.blog.dto.PostDTO(p.id, p.title, p.text, p.datePublic) FROM Post p WHERE p.id = :id")
     PostDTO getById(@Param("id") int id);
+
+    @Query("SELECT new com.example.blog.dto.PostDTO(p.id, p.title, CONCAT(SUBSTRING(p.text, 1, 15), '...'), p.datePublic) FROM Post p INNER JOIN p.marks m WHERE m.id = :id ORDER BY p.datePublic")
+    List<PostDTO> getListByMarkId(@Param("id") int id);
 
     @Modifying
     @Transactional

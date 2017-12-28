@@ -1,8 +1,8 @@
 package com.example.blog.service;
 
-import com.example.blog.mapper.PostMapper;
 import com.example.blog.dto.NewPostDTO;
 import com.example.blog.dto.PostDTO;
+import com.example.blog.mapper.PostMapper;
 import com.example.blog.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +25,10 @@ public class PostService {
 
     public PostDTO readPost(int id) {
         return postRepository.getById(id);
+    }
+
+    public List<PostDTO> readPostByMarkId(int id) {
+        return postRepository.getListByMarkId(id);
     }
 
     public int updatePost(PostDTO post, int id) {

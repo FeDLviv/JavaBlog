@@ -2,6 +2,7 @@ package com.example.blog.service;
 
 import com.example.blog.dto.CommentDTO;
 import com.example.blog.dto.NewCommentDTO;
+import com.example.blog.dto.UpdateCommentDTO;
 import com.example.blog.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,11 @@ public class CommentService {
         return commentRepository.getById(id);
     }
 
-    public int updateComment(CommentDTO comment, int id) {
+    public List<CommentDTO> readCommentsByPostId(int id) {
+        return commentRepository.getListByPostId(id);
+    }
+
+    public int updateComment(UpdateCommentDTO comment, int id) {
         return commentRepository.updateComment(id, comment.getText(), comment.getDatePublic());
     }
 
@@ -38,5 +43,6 @@ public class CommentService {
     public void deleteComment(int id) {
         commentRepository.deleteById(id);
     }
+
 }
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/mark")
+@RequestMapping("/api/v1/mark")
 @Api(description = "Операції повязані з мітками до постів")
 public class MarkController {
 
@@ -50,7 +50,7 @@ public class MarkController {
 
     @DeleteMapping(value = "/{id}")
     @ApiOperation(value = "Видалення мітки по ID")
-    public void deleteЬфкл(@PathVariable int id) {
+    public void deleteMark(@PathVariable int id) {
         markService.deleteMark(id);
     }
 

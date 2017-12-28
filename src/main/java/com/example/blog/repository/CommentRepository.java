@@ -20,11 +20,14 @@ public interface CommentRepository extends CrudRepository<Comment, Integer> {
     @Query(nativeQuery = true, value = "INSERT INTO comment (text, id_post, id_user) VALUES (:text, :idPost, :idUser)")
     void createComment(@Param("text") String text, @Param("idPost") int idPost, @Param("idUser") int idUser);
 
-    @Query("SELECT new com.example.blog.dto.CommentDTO(c.id, c.text, c.datePublic) FROM Comment c ORDER BY c.datePublic")
+    @Query("SELECT new com.example.blog.dto.CommentDTO(c.id, c.text, c.datePublic, u.name) FROM Comment c INNER JOIN c.user u ORDER BY c.datePublic")
     List<CommentDTO> getList();
 
-    @Query("SELECT new com.example.blog.dto.CommentDTO(c.id, c.text, c.datePublic) FROM Comment c WHERE c.id = :id")
+    @Query("SELECT new com.example.blog.dto.CommentDTO(c.id, c.text, c.datePublic, u.name) FROM Comment c INNER JOIN c.user u WHERE c.id = :id")
     CommentDTO getById(@Param("id") int id);
+
+    @Query("SELECT new com.example.blog.dto.CommentDTO(c.id, c.text, c.datePublic, u.name) FROM Comment c INNER JOIN c.user u INNER JOIN c.post p WHERE p.id = :id ORDER BY c.datePublic")
+    List<CommentDTO> getListByPostId(@Param("id") int id);
 
     @Modifying
     @Transactional

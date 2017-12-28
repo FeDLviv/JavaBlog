@@ -2,6 +2,7 @@ package com.example.blog.controller;
 
 import com.example.blog.dto.CommentDTO;
 import com.example.blog.dto.NewCommentDTO;
+import com.example.blog.dto.UpdateCommentDTO;
 import com.example.blog.service.CommentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/comment")
+@RequestMapping("/api/v1/comment")
 @Api(description = "Операції повязані з коментарями до постів")
 public class CommentController {
 
@@ -36,9 +37,15 @@ public class CommentController {
         return commentService.readComment(id);
     }
 
+    @GetMapping(value = "post/{id}")
+    @ApiOperation(value = "Отримання всіх коментарів, для конкретного поста, ID поста задається")
+    public List<CommentDTO> readCommentsByPostId(@PathVariable int id) {
+        return commentService.readCommentsByPostId(id);
+    }
+
     @PutMapping(value = "/{id}")
     @ApiOperation(value = "Оновлення коментаря по ID")
-    public int updateComment(@RequestBody CommentDTO comment, @PathVariable int id) {
+    public int updateComment(@RequestBody UpdateCommentDTO comment, @PathVariable int id) {
         return commentService.updateComment(comment, id);
     }
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/post")
+@RequestMapping("/api/v1/post")
 @Api(description = "Операції повязані з постами")
 public class PostController {
 
@@ -34,6 +34,12 @@ public class PostController {
     @ApiOperation(value = "Отримання поста по ID")
     public PostDTO readPost(@PathVariable int id) {
         return postService.readPost(id);
+    }
+
+    @GetMapping(value = "mark/{id}")
+    @ApiOperation(value = "Отримання всіх постів, з конкретною міткою, ID мітки задається")
+    public List<PostDTO> readPostsByMarkId(@PathVariable int id) {
+        return postService.readPostByMarkId(id);
     }
 
     @PutMapping(value = "/{id}")
