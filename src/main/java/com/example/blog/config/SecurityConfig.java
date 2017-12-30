@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -15,24 +16,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
-                //.antMatchers(HttpMethod.GET, "/api/**").authenticated()
-                .antMatchers(HttpMethod.POST, "/api/**").authenticated()
-                .antMatchers(HttpMethod.PUT, "/api/**").authenticated()
-                .antMatchers(HttpMethod.DELETE, "/api/**").authenticated()
+                .antMatchers("/swagger-ui.html").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/v1/comment").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
                 .anyRequest().permitAll()
-                .and().httpBasic();
-        //.and().formLogin().permitAll()
-        //.and().logout().permitAll();
+                .and().formLogin().permitAll()
+                .and().logout().permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withDefaultPasswordEncoder().username("root").password("1111").roles("USER").build());
+        manager.createUser(User.withDefaultPasswordEncoder().username("admin").password("1111").roles("ADMIN").build());
+        manager.createUser(User.withDefaultPasswordEncoder().username("user").password("2222").roles("USER").build());
         return manager;
     }
-
 
 //    @Override
 //    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
