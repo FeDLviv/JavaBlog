@@ -1,5 +1,6 @@
 package com.example.blog.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user")
-//@JsonIgnoreProperties("comments")
+@JsonIgnoreProperties({"comments"})
 @Data
 public class User {
 

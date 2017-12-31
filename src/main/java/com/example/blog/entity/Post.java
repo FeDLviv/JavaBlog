@@ -1,5 +1,6 @@
 package com.example.blog.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,14 +8,14 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name="post")
-//@JsonIgnoreProperties({"marks", "comments"})
+@Table(name = "post")
+@JsonIgnoreProperties({"marks", "comments"})
 @Data
-public class Post{
+public class Post {
 
     @Id
     @Column(name = "id_post")
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(nullable = false)
@@ -25,11 +26,10 @@ public class Post{
 
     @Column(name = "public", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    //@JsonFormat(pattern="yyyy-MM-dd")
     private Date datePublic;
 
     @ManyToMany
-    @JoinTable(name="post_mark", joinColumns = @JoinColumn(name="id_post"), inverseJoinColumns = @JoinColumn(name="id_mark"))
+    @JoinTable(name = "post_mark", joinColumns = @JoinColumn(name = "id_post"), inverseJoinColumns = @JoinColumn(name = "id_mark"))
     private Set<Mark> marks;
 
     @OneToMany(mappedBy = "post")

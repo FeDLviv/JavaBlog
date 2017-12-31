@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/comment")
+@RequestMapping("/api/v1/comments")
 @Api(description = "Операції повязані з коментарями до постів")
 public class CommentController {
 
@@ -37,7 +37,7 @@ public class CommentController {
         return commentService.readComment(id);
     }
 
-    @GetMapping(value = "post/{id}")
+    @GetMapping(value = "posts/{id}")
     @ApiOperation(value = "Отримання всіх коментарів, для конкретного поста, ID поста задається")
     public List<CommentDTO> readCommentsByPostId(@PathVariable int id) {
         return commentService.readCommentsByPostId(id);

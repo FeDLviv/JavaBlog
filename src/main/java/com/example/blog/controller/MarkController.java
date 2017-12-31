@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/mark")
+@RequestMapping("/api/v1/marks")
 @Api(description = "Операції повязані з мітками до постів")
 public class MarkController {
 
