@@ -1,14 +1,12 @@
 package com.example.blog.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "mark")
-@JsonIgnoreProperties({"posts"})
+//@JsonIgnoreProperties({"posts"})
 @Data
 public class Mark {
 
@@ -20,8 +18,8 @@ public class Mark {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "marks")
-    private Set<Post> posts;
+    //@ManyToMany(mappedBy = "marks")
+    //private Set<Post> posts;
 
     @Override
     public String toString() {

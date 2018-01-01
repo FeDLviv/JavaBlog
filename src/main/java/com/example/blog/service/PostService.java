@@ -1,13 +1,19 @@
 package com.example.blog.service;
 
+import com.example.blog.dto.MarkDTO;
 import com.example.blog.dto.NewPostDTO;
 import com.example.blog.dto.PostDTO;
+import com.example.blog.entity.Mark;
+import com.example.blog.entity.Post;
+import com.example.blog.mapper.MarkMapper;
 import com.example.blog.mapper.PostMapper;
+import com.example.blog.repository.MarkRepository;
 import com.example.blog.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class PostService {
@@ -15,8 +21,18 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
+    @Autowired
+    private MarkRepository markRepository;
+
     public PostDTO createPost(NewPostDTO post) {
         return PostMapper.INSTANCE.PostToPostDTO(postRepository.save(PostMapper.INSTANCE.NewPostDTOToPost(post)));
+    }
+
+    public void createMarkToPost(int idPost, int idMark) {
+        Post post = postRepository.findById(idPost).get();
+        Mark mark = markRepository.findById(idMark).get();
+        post.getMarks().add(mark);
+        postRepository.save(post);
     }
 
     public List<PostDTO> readPosts() {
@@ -25,6 +41,11 @@ public class PostService {
 
     public PostDTO readPost(int id) {
         return postRepository.getById(id);
+    }
+
+    public Set<MarkDTO> readMarksByPostId(int id) {
+        Post temp = postRepository.findById(id).get();
+        return MarkMapper.INSTANCE.MarkToMarkDTO(temp.getMarks());
     }
 
     public List<PostDTO> readPostByMarkId(int id) {
@@ -44,4 +65,10 @@ public class PostService {
         postRepository.deleteById(id);
     }
 
+    public void deleteMarkFromPost(int idPost, int idMark) {
+        Post post = postRepository.findById(idPost).get();
+        Mark mark = markRepository.findById(idMark).get();
+        post.getMarks().remove(mark);
+        postRepository.save(post);
+    }
 }
