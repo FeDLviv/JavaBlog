@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -30,7 +31,7 @@ public class Post {
 
     @ManyToMany
     @JoinTable(name = "post_mark", joinColumns = @JoinColumn(name = "id_post"), inverseJoinColumns = @JoinColumn(name = "id_mark"))
-    private Set<Mark> marks;
+    private List<Mark> marks;
 
     @OneToMany(mappedBy = "post")
     private Set<Comment> comments;

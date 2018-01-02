@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-import java.util.Set;
+import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface MarkMapper {
@@ -18,6 +18,6 @@ public interface MarkMapper {
 
     MarkDTO MarkToMarkDTO(Mark mark);
 
-    Set<MarkDTO> MarkToMarkDTO(Set<Mark> mark);
+    List<MarkDTO> MarkToMarkDTO(List<Mark> mark);
 
 }

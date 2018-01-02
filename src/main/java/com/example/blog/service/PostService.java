@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class PostService {
@@ -43,7 +42,7 @@ public class PostService {
         return postRepository.getById(id);
     }
 
-    public Set<MarkDTO> readMarksByPostId(int id) {
+    public List<MarkDTO> readMarksByPostId(int id) {
         Post temp = postRepository.findById(id).get();
         return MarkMapper.INSTANCE.MarkToMarkDTO(temp.getMarks());
     }

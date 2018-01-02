@@ -7,28 +7,20 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "mark")
-@JsonIgnoreProperties({"posts"})
+@Table(name = "role")
+@JsonIgnoreProperties({"users"})
 @Data
-public class Mark {
+public class Role {
 
     @Id
-    @Column(name = "id_mark")
+    @Column(name = "id_role")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(nullable = false, unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "marks")
-    private List<Post> posts;
-
-    @Override
-    public String toString() {
-        return "Mark{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users;
 
 }

@@ -10,9 +10,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
+
+    Optional<User> findByName(String name);
 
     @Query("SELECT new com.example.blog.dto.UserDTO(u.id, u.name) FROM User u ORDER BY u.name")
     List<UserDTO> getList();
@@ -24,5 +27,5 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Transactional
     @Query(nativeQuery = true, value = "UPDATE user SET name = :name WHERE id_user = :id")
     int updateUser(@Param("id") int id, @Param("name") String name);
-    
+
 }

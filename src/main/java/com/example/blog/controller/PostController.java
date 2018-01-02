@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v1/posts")
@@ -46,7 +45,7 @@ public class PostController {
 
     @GetMapping(value = "/{id}/marks")
     @ApiOperation(value = "Отримання міток для статті, ID статті задається")
-    public Set<MarkDTO> readMarksByPostId(@PathVariable int id) {
+    public List<MarkDTO> readMarksByPostId(@PathVariable int id) {
         return postService.readMarksByPostId(id);
     }
 
