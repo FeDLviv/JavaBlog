@@ -35,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/swagger-ui.html").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/v1/comments").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.POST, "/api/v1/users").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
@@ -43,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().logout().permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
     }
 
+//    @Bean
 //    @Bean
 //    public UserDetailsService userDetailsService() {
 //        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();

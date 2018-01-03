@@ -20,8 +20,8 @@ public class UserController {
 
     @PostMapping
     @ApiOperation(value = "Додавання нового користувача")
-    public UserDTO createPost(@RequestBody NewUserDTO user) {
-        return userService.createUser(user);
+    public void createUser(@RequestBody NewUserDTO user) {
+        userService.createUser(user);
     }
 
     @GetMapping
@@ -38,7 +38,7 @@ public class UserController {
 
     @PutMapping(value = "/{id}")
     @ApiOperation(value = "Оновлення користувача по ID")
-    public int updateUser(@RequestBody UserDTO post, @PathVariable int id) {
+    public int updateUser(@RequestBody NewUserDTO post, @PathVariable int id) {
         return userService.updateUser(post, id);
     }
 

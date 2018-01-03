@@ -11,4 +11,6 @@ public class NewUserDTO {
 
     private String name;
 
+    private String password;
+
 }
