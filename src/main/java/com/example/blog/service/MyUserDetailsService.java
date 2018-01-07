@@ -26,7 +26,7 @@ public class MyUserDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), getAuthorities(user));
     }
 
-    private static Collection<? extends GrantedAuthority> getAuthorities(User user) {
+    public static Collection<? extends GrantedAuthority> getAuthorities(User user) {
         String[] roles = user.getRoles()
                 .stream()
                 .map((role) -> role.getName())
