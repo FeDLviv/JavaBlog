@@ -16,6 +16,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    private RestAuthenticationEntryPoint authenticationEntryPoint;
+
+    @Autowired
     private MyUserDetailsService userDetailsService;
 
     @Bean
@@ -33,7 +36,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/api/v1/security/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/comments").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.POST, "/api/v1/users").hasAnyRole("ADMIN", "USER")
@@ -41,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
                 .anyRequest().permitAll()
+                .and().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
                 .and().formLogin().permitAll()
                 .and().logout().permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
     }
