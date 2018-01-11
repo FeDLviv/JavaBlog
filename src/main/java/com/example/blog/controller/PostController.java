@@ -11,7 +11,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class PostController {
                     paramType = "query",
                     value = "Критерій сортування у форматі: property(,asc|desc). За замовчуванням, йде сортування по зростанню. Є підтримка для декількох параметрів сортування.")
     })
-    public List<PostDTO> readPosts(@ApiIgnore Pageable pagination) {
+    public List<PostDTO> readPosts(Pageable pagination) {
         return postService.readPosts(pagination).getContent();
     }
 

@@ -11,7 +11,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
@@ -52,7 +51,7 @@ public class CommentController {
                     paramType = "query",
                     value = "Критерій сортування у форматі: property(,asc|desc). За замовчуванням, йде сортування по зростанню. Є підтримка для декількох параметрів сортування.")
     })
-    public List<CommentDTO> readCommentsByPostId(@PathVariable int id, @ApiIgnore Pageable pageable) {
+    public List<CommentDTO> readCommentsByPostId(@PathVariable int id, Pageable pageable) {
         return commentService.readCommentsByPostId(id, pageable).getContent();
     }
 
