@@ -5,9 +5,13 @@ import com.example.blog.dto.NewPostDTO;
 import com.example.blog.dto.PostDTO;
 import com.example.blog.service.PostService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
@@ -32,9 +36,18 @@ public class PostController {
     }
 
     @GetMapping
-    @ApiOperation(value = "Отримання всіх постів, сортованих по даті публікації, з коротким текстом")
-    public List<PostDTO> readPosts() {
-        return postService.readPosts();
+    @ApiOperation(value = "Отримання всіх постів, з коротким текстом")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", dataType = "int", paramType = "query",
+                    value = "Номер сторінки, яку відобразити (0..N)"),
+            @ApiImplicitParam(name = "size", dataType = "int", paramType = "query",
+                    value = "Кількість записів на сторінці."),
+            @ApiImplicitParam(name = "sort", dataType = "string", allowMultiple = true,
+                    paramType = "query",
+                    value = "Критерій сортування у форматі: property(,asc|desc). За замовчуванням, йде сортування по зростанню. Є підтримка для декількох параметрів сортування.")
+    })
+    public List<PostDTO> readPosts(@ApiIgnore Pageable pagination) {
+        return postService.readPosts(pagination).getContent();
     }
 
     @GetMapping(value = "/{id}")

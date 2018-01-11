@@ -10,6 +10,8 @@ import com.example.blog.mapper.PostMapper;
 import com.example.blog.repository.MarkRepository;
 import com.example.blog.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,8 +36,8 @@ public class PostService {
         postRepository.save(post);
     }
 
-    public List<PostDTO> readPosts() {
-        return postRepository.getList();
+    public Page<PostDTO> readPosts(Pageable pagination) {
+        return postRepository.getList(pagination);
     }
 
     public PostDTO readPost(int id) {

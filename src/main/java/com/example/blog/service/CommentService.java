@@ -5,6 +5,8 @@ import com.example.blog.dto.NewCommentDTO;
 import com.example.blog.dto.UpdateCommentDTO;
 import com.example.blog.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,8 +29,8 @@ public class CommentService {
         return commentRepository.getById(id);
     }
 
-    public List<CommentDTO> readCommentsByPostId(int id) {
-        return commentRepository.getListByPostId(id);
+    public Page<CommentDTO> readCommentsByPostId(int id, Pageable pageable) {
+        return commentRepository.getListByPostId(id, pageable);
     }
 
     public int updateComment(UpdateCommentDTO comment, int id) {
