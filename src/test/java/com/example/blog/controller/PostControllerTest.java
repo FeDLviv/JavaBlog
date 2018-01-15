@@ -4,9 +4,10 @@ import com.example.blog.dto.PostDTO;
 import com.example.blog.service.PostService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -14,13 +15,17 @@ import static org.mockito.Mockito.when;
 /*
 UNIT TEST
  */
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
+//@RunWith(MockitoJUnitRunner.class)
+@SpringBootTest
 public class PostControllerTest {
 
-    @Mock
+    @MockBean
+    //@Mock
     private PostService postService;
 
-    @InjectMocks
+    @Autowired
+    //@InjectMocks
     private PostController postController;
 
     @Test
